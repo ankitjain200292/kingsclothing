@@ -1,0 +1,34 @@
+<h1>Listing searches</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @stories.count %>
+      <tr>
+        <td>
+<%#= link_to 'Stories(' + @stories.count.to_s + ')' , admin_stories_path(:query => @search) %>
+          <%= link_to 'Stories(' + @stories.count.to_s + ')' , advance_search_path(:data => @stories), :remote => true %>
+        </td>
+        
+      </tr>
+    <% end %>
+      <% if @photos.count %>
+      <tr>
+        <td><%= link_to 'Photos(' + @photos.count.to_s + ')' , admin_photos_path(:query => @search) %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div id="test"></div>
+
+<br>
+

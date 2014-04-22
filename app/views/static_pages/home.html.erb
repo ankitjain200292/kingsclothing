@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <body>
+    <!--Main-Body-Start-->
+    <div class="main-body-container">
+      <div class="main-body">
+        <div class="main-body-content">
+          <div class="main-body-left">
+            <% flash.each do |k, v| %>
+              <div id="<%= k %>"><%= v %></div>
+            <% end %>
+            <h1>Welcome</h1>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer quis enim tellus, vitae varius mauris. Maecenas vitae quam id felis tincidunt feugiat. In faucibus tincidunt purus, vitae dictum quam ultricies non. Pellentesque eget nisi est, a porttitor lectus. 
+            </p>
+          </div>
+          <div class="main-body-right">
+          </div>
+        </div>
+        <div class="main-body-bottom">
+          <ul>
+            <li class=" blue-bg">
+              <div class="main-bottom-heading">
+                <div class="main-bottom-image">
+                  <%= link_to image_tag("main-bottom-img.jpg", alt: "Facebook"), '#' %>
+                </div>
+                <div class="main-bottom-title">
+                  <h6>facebook.com/jmilnes</h6>
+                  <h4>Recent Activity</h4>
+                </div>
+              </div>
+              <div class="main-bottom-content">
+                <ul>
+                  <li>
+                    <p><span class="blue">John Milnes</span> lorum ipsum dolore amiet lorism lorum dolore ism lorum ipsume amiet ipsom</p>
+                    <ul class="comment-box">
+                      <li class="grey">9:44 pm</li><li class="blue"><a href="#">Comment</a></li><li class="blue"><a href="#">Like</a></li>
+                    </ul>	
+                  </li>
+                  <li class="main-bottom-con-last">
+                    <p><span class="blue">John Milnes</span> lorum ipsum dolore amiet lorism lorum dolore ism lorum ipsume amiet ipsom</p>
+                    <ul class="comment-box">
+                      <li class="grey">9:44 pm</li><li class="blue"><a href="#">Comment</a></li><li class="blue"><a href="#">Like</a></li>
+                    </ul>	
+                  </li>
+                </ul>	
+              </div>
+
+            </li>
+            <li class="skyblue-bg">
+              <div class="main-bottom-heading">
+                <div class="main-bottom-image">
+                  <%= link_to image_tag("main-bottom-img.jpg", alt: "Facebook"), '#' %>
+                </div>
+                <div class="main-bottom-title">
+                  <h6>John M</h6>
+                  <h4>@johnmilnes</h4>
+                </div>
+              </div>
+              <div class="main-bottom-content">
+                <ul>
+                  <li>
+                    <p><span class="skyblue">John Milnes</span> lorum ipsum dolore amiet lorism lorum dolore ism lorum ipsume amiet ipsom</p>
+                    <ul class="comment-box">
+                      <li class="skyblue">12 hours ago</li><li class="skyblue"><a href="#">reply</a></li><li class="skyblue"><a href="#">etweet</a></li>
+                      <li class="skyblue"><a href="#">favorite</a></li>
+                    </ul>	
+                  </li>
+                  <li class="main-bottom-con-last">
+                    <p><span class="skyblue">John Milnes</span> lorum ipsum dolore amiet lorism lorum dolore ism lorum ipsume amiet ipsom</p>
+                    <ul class="comment-box">
+                      <li class="grey">9:44 pm</li><li class="skyblue"><a href="#">Comment</a></li><li class="skyblue"><a href="#">Like</a></li>
+                    </ul>	
+                  </li>
+                </ul>	
+              </div>
+
+            </li>
+            <li class="bottom-last"><%= link_to image_tag("main-body-li-img.jpg", alt: "Facebook"), '#' %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--Main-Body-End-->
+
+    <!--Footer-Start-->
+    <div class="footer-container">
+      <div class="footer">
+        <div class="footer-content">
+          <div class="footer-content-complete">
+            <h4>Footer info?</h4>	
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Footer-End-->
+  </body>
+</html>

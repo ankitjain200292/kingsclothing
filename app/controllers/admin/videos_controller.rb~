@@ -1,0 +1,83 @@
+class Admin::VideosController < ApplicationController
+before_filter :login
+
+  def index
+  @videos = Video.paginate(:page => params[:page], :per_page => 10)
+  end
+
+  def new
+  @videos = Video.new
+  end
+
+  def create
+   if params[:upload].nil?
+   flash[:error] = "Please select a file"
+   redirect_to  new_admin_video_path
+  else
+  if params[:upload][:datafile].nil? or params[:upload][:thumbnail].nil? or params[:video][:title]=="" or params[:video][:description]==""
+   flash[:error] = "Please Fill all the fields"
+   redirect_to  new_admin_video_path
+  else
+  post = Video.uploadvideo(params[:upload],)
+  if post
+  @videos  = Video.new(user_params)
+  @videos.update_attributes(:video_name => params[:upload][:datafile].original_filename,:thumb_name => params[:upload][:thumbnail].original_filename ) 
+  @videos.save
+  redirect_to admin_videos_path
+  else
+  flash[:error] = "Please select a valid file"
+  redirect_to new_admin_video_path
+  end
+  end
+  end
+  end
+  def show
+  @videos = Video.find_by(id: params[:id])
+  end
+
+ def edit
+ @videos = Video.find_by(id: params[:id])
+  end
+
+
+ def update
+  post = Video.uploadvideo(params[:upload])
+  if post
+  @videos = Video.find_by(id: params[:id])
+  #@videos.update_attributes(:title =>params[:video][:title])
+  @videos.update_attributes(:title =>params[:video][:title],:description =>params[:video][:description],:video_name => params[:upload][:datafile].original_filename,:thumb_name => params[:upload][:thumbnail].original_filename ) 
+  redirect_to admin_videos_path
+   else
+   redirect_to new_admin_video_path
+  end
+ end
+ 
+  def destroy
+  Video.find(params[:id]).destroy
+  redirect_to admin_videos_path
+           
+  end
+
+def deletevideos
+  @video = params[:records]
+  @video.each do |id|
+  Video.find_by_id(id).destroy
+  end
+  redirect_to admin_videos_path
+  end
+
+
+ private
+
+ def login
+  if not signed_in?
+  flash[:error]='Please sign in First'
+  redirect_to new_admin_session_path
+  end
+  end
+
+def user_params
+      params.require(:upload).permit(:datafile,:thumbnail)
+       params.require(:video).permit(:title,:description)
+    end
+  end

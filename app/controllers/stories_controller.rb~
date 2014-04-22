@@ -1,0 +1,30 @@
+class StoriesController < ApplicationController
+   def index
+   @stories = Story.all
+   #@stories= Story.paginate(:page => params[:page], :per_page => 1)
+  end
+
+  def show
+   @stories = Story.find_by(id: params[:id])
+  end
+
+  def new
+    
+  end
+
+  def create
+    
+  end
+
+  def edit
+    
+  end
+
+  def update
+   
+  end
+
+  def destroy
+    
+  end
+end

@@ -1,0 +1,21 @@
+<div class="main-body-container">
+		<div class="main-body">
+        	<div class="main-body-content">
+<%= link_to image_tag(@photos.image_name,:size => "200x150"),asset_path(@photos.image_name),:class =>'lightview' %><br>
+<%= link_to "Back", :back	 %>
+<%= link_to "Edit", edit_admin_photos_path(@photos)	 %>
+</div>
+</div>
+</div>
+<div class="footer-container">
+		<div class="footer">
+        	<div class="footer-content">
+            	<div class="footer-content-complete">
+                	<h4>Footer info?</h4>	
+                </div>
+            </div>
+        </div>
+</div>
+<!--Footer-End-->
+</body>
+</html>

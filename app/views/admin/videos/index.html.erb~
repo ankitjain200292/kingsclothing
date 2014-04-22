@@ -1,0 +1,91 @@
+<div class="main-body-container">
+		<div class="main-body">
+                   
+        	<div class="main-body-content">
+<%= @name %>
+<div id="adminhead">
+<div class="right"><h1>Listing Videos	</h1></div>
+<div class="left">
+<div class="iconleft"><%= link_to image_tag('add.png',:size => "30x30"), new_admin_video_path %>New</div>
+<div class="iconleft"><%= link_to image_tag('edit.png',:size => "30x30"), '#',:id=>'edit' %>Edit</div>
+<div class="iconleft"><%= link_to image_tag('delete.png',:size => "30x30"), admin_videos_path,:id=>'delete' %>Delete</div>
+</div></div><br>
+<%= form_tag admin_videos_path, :method => 'get' do %>  
+     
+        <%= text_field_tag :search, params[:search] %>  
+        <%= submit_tag "Search", :name => nil %>   
+    <% end %>  
+ <%= button_tag "Clear",:onclick =>'clearsearch()'%> 
+<table class="set">
+  <tr>
+    <th> <%= check_box_tag "selectall",1 %></th>
+    <th>Name</th>
+    <th>Created at</th>
+    <th>Show</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+
+<% @videos.each do |videos| %>
+  <tr>
+    <td><%= check_box_tag "videos[]",videos.id %></td>
+    <td><%= videos.video_name %></td>
+    <td><%= videos.created_at %></td>
+    <td><%= link_to image_tag('show.png',:size => "20x20"), admin_video_path(videos) %></td>
+    <td><%= link_to image_tag('edit.png',:size => "20x20"), edit_admin_video_path(videos) %></td>
+    <td><%= link_to image_tag('DeleteRed.png',:size => "20x20"), admin_video_path(videos), method: :delete,
+                                     data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<%= will_paginate @posts,:id =>'photopagination' %>
+
+</div>
+</div>
+</div>
+<div class="footer-container">
+		<div class="footer">
+        	<div class="footer-content">
+            	<div class="footer-content-complete">
+                	<h4>Footer info?</h4>	
+                </div>
+            </div>
+        </div>
+</div>
+<!--Footer-End-->
+</body>
+<script >
+function clearsearch()
+{
+$('#search').val('');
+ window.location.replace('/admin/videos' )
+}
+$('#selectall').change	(function() {
+    if (this.checked) {
+    { $('input[type="checkbox"]').prop("checked", true)}; }
+     
+    else {
+    { $('input[type="checkbox"]').prop("checked", false)}; }
+});
+$('#delete').click(function() {
+    var selected = new Array();
+$('.set input:checked').each(function() {
+    selected.push($(this).attr('value'));
+});
+  $.ajax({
+      type: "post",
+      url: "/admin/deletevideos",
+      data: { records:selected },
+    })
+});
+$('#edit').click(function() {
+    var selected = new Array();
+$('.set input:checked').each(function() {
+    selected.push($(this).attr('value'));
+    window.location.replace("/admin/videos/" + selected[0] + "/edit" )
+}); 
+});
+</script>
+</html>

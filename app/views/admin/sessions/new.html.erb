@@ -1,0 +1,39 @@
+<div class="main-body-container">
+  <div class="main-body">
+    <div class="main-body-content">
+      <% provide(:title, "Sign in") %>
+      <h1>Sign in</h1>
+      <% flash.each do |k, v| %>
+        <div id="<%= k %>"><%= v %></div>
+      <% end %>
+
+      <div class="row">
+        <div id="user_login">
+          <%= form_for(:session, url: admin_sessions_path) do |f| %>
+
+            <%= f.label :email %>
+            <%= f.text_field :email %><br>
+
+            <%= f.label :password %>
+            <%= f.password_field :password %><br>
+
+            <%= f.submit "Sign in", class: "btn btn-large btn-primary",id:"session_submit" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-container">
+    <div class="footer">
+      <div class="footer-content">
+        <div class="footer-content-complete">
+          <h4>Footer info?</h4>	
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Footer-End-->
+  </body>
+  </html>
+

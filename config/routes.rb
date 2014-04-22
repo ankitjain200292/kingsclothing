@@ -1,0 +1,23 @@
+Kingsclothing::Application.routes.draw do
+  resources :stories
+  resources :videos
+  root "static_pages#home"
+  resources :photos
+  get "static_pages/home", :as => 'home'
+  get "static_pages/aboutus", :as => 'aboutus'
+  resources :contactus, :only => [:new, :create]
+  resources :comments, :only => [:new, :create]
+  match '/search', to: 'searches#index',     via: 'get'
+    match '/advance-search', to: 'searches#advance', :as => 'advance_search',    via: 'get'
+  namespace :admin do
+    resources :videos, :photos,:stories,:users
+    resources :sessions, only: [:new, :create, :destroy]
+    match '',  to: 'sessions#new',         via: 'get'
+    match '/signin',  to: 'sessions#new',         via: 'get'
+    match '/signout', to: 'sessions#destroy',     via: 'get'
+    match '/deletephoto', to: 'photos#deletephotos',     via: 'post'
+    match '/deletenews', to: 'stories#deletenews',     via: 'post'
+    match '/deletevideos', to: 'videos#deletevideos',     via: 'post'
+    
+  end
+end

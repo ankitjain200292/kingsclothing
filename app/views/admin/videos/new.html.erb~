@@ -1,0 +1,43 @@
+<div class="main-body-container">
+		<div class="main-body">
+                   
+        	<div class="main-body-content">
+<h1>File Upload</h1>
+<%= form_for @videos, :url => admin_videos_path,:html => {:multipart => true} do |form| %>
+<div class="videoupload"> 
+<div class="videoleft">
+<%= form.label :title %></div>
+<%= form.text_field :title %><br></div>
+<div class="videoupload"> 
+<div class="videoleft">
+<%= form.label :description %></div>
+      <%= form.text_area :description,:rows =>13, :cols => 50 %><br></div>
+<div class="videoupload"> 
+<div class="videoleft">
+<p><label for="upload_file">Select Thumbnail</label> :</div> 
+<%= file_field 'upload', 'thumbnail' %></p></div>
+<div class="videoupload"> 
+<div class="videoleft">
+<p><label for="upload_file">Select Video</label> : </div>
+<%= file_field 'upload', 'datafile' %></p></div>
+<%= submit_tag "Upload",:class => 'video_button' %>
+<%= link_to "Cancel", :back,:class => 'video_cancel'	 %>
+<% end %>
+
+</div>
+</div>
+</div>
+<div class="footer-container">
+		<div class="footer">
+        	<div class="footer-content">
+            	<div class="footer-content-complete">
+                	<h4>Footer info?</h4>	
+                </div>
+            </div>
+        </div>
+</div>
+<!--Footer-End-->
+</body>
+</html>
+
+

@@ -1,0 +1,103 @@
+<div class="main-body-container">
+  <div class="main-body">
+    <div class="main-body-content">
+      <div class="test">
+        <div class="testleft"><h1>Listing Images</h1></div>
+        <div class="testright">
+          <% if can? :create, @photo %>
+            <div class="iconleft"><%= link_to image_tag('add.png',:size => "30x30"), new_admin_photo_path %>New</div>
+          <% end %>
+          <% if can? :update, @photo %>
+            <div class="iconleft"><%= link_to image_tag('edit.png',:size => "30x30"), '#',:id=>'edit' %>Edit</div>
+          <% end %>
+          <% if can? :destroy, @photo %>
+            <div class="iconleft"><%= link_to image_tag('delete.png',:size => "30x30"), admin_photos_path,:id=>'delete' %>Delete</div>
+          <% end %></div></div>
+          
+      <div>
+      <%= form_tag admin_photos_path, :method => 'get' do %>  
+
+        <%= text_field_tag :search, params[:search] %>  
+        <%= submit_tag "Search", :name => nil %>  
+      <% end %> 
+      <%= button_tag "Clear",:onclick =>'clearsearch()'%> 
+</div>
+      <table class="set">
+        <tr>
+          <th> <%= check_box_tag "selectall",1 %></th>
+          <th>Name</th>
+          <th>Last Updated</th>
+          <th>Show</th>
+          <% if can? :update, @photo %>
+            <th>Edit</th>
+          <% end %>
+          <% if can? :destroy, @photo %>
+            <th>Delete</th>
+          <% end %>
+        </tr>
+
+        <% @photos.each do |photos| %>
+          <tr>
+            <td><%= check_box_tag "photos[]",photos.id %></td>
+            <td><%= photos.image_name %></td>
+            <td><%= photos.updated_at.strftime("%m/%d/%Y")  %></td>
+            <td><%= link_to image_tag('show.png',:size => "20x20"), admin_photo_path(photos) %></td>
+            <% if can? :update, photos %>
+              <td><%= link_to image_tag('edit.png',:size => "20x20"), edit_admin_photo_path(photos) %></td>
+            <% end %>
+            <% if can? :destroy, @photo %>
+              <td><%= link_to image_tag('DeleteRed.png',:size => "20x20"), admin_photo_path(photos), method: :delete,
+                  data: { confirm: 'Are you sure?' } %></td><% end %>
+          </tr>
+        <% end %>
+      </table>
+      <br />
+      <%= will_paginate @posts,:id =>'photopagination' %>
+    </div>
+  </div>
+</div>
+<div class="footer-container">
+  <div class="footer">
+    <div class="footer-content">
+      <div class="footer-content-complete">
+        <h4>Footer info?</h4>	
+      </div>
+    </div>
+  </div>
+</div>
+<!--Footer-End-->
+</body>
+<script >
+  function clearsearch()
+  {
+    $('#search').val('');
+    window.location.replace('/admin/photos' )
+  }
+  $('#selectall').change	(function() {
+    if (this.checked) {
+      { $('input[type="checkbox"]').prop("checked", true)}; }
+     
+    else {
+      { $('input[type="checkbox"]').prop("checked", false)}; }
+  });
+  $('#delete').click(function() {
+    var selected = new Array();
+    $('.set input:checked').each(function() {
+      if($(this).attr('id')!="selectall")
+      selected.push($(this).attr('value'));
+    });
+    $.ajax({
+      type: "post",
+      url: "/admin/deletephoto",
+      data: { records:selected }
+    })
+  });
+  $('#edit').click(function() {
+    var selected = new Array();
+    $('.set input:checked').each(function() {
+      selected.push($(this).attr('value'));
+      window.location.replace("/admin/photos/" + selected[0] + "/edit" )
+    }); 
+  });
+</script>
+</html>

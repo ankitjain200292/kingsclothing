@@ -1,0 +1,25 @@
+class ContactusController < ApplicationController
+  
+  def new
+   @contactus = Contactus.new()
+  end
+
+  def create
+   @contactus = Contactus.new(user_params)
+   if @contactus.valid?
+    
+     @contactus.save
+        flash[:error] = "Thankyou for your suggetion we will come back to you soon"
+        redirect_to home_path
+     
+   else
+      flash[:error] = "*Please fill all the fields"
+     redirect_to :action => "new"
+    end
+  end
+
+ private
+  def user_params
+    params.require(:contactus).permit(:name, :email, :phone, :comment)
+  end
+  end

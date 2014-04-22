@@ -1,0 +1,75 @@
+<div class="main-body-container">
+  <div class="main-body">
+
+    <div class="main-body-content">
+
+      <% provide(:title, 'Sign up') %>
+      <h1>Sign up</h1>
+      <div class="contact-form">
+        <%= form_for @user, :url => admin_users_path do |f| %>
+          <%= render 'admin/shared/error_messages' %>
+          <fieldset class="fields">
+            <div class="add_news">
+              <div class="left_news">
+                <%= f.label :name %></div>
+              <div class="right_news">
+                <%= f.text_field :name %></div></div>
+            <div class="add_news">
+              <div class="left_news">
+                <%= f.label :email %></div>
+              <div class="right_news">
+                <%= f.text_field :email %></div></div>
+            <div class="add_news">
+              <div class="left_news">
+                <%= f.label :password %></div>
+              <div class="right_news">
+                <%= f.password_field :password %></div></div>
+            <div class="add_news">
+              <div class="left_news">
+                <%= f.label :password_confirmation, "Confirmation" %></div>
+              <div class="right_news">
+                <%= f.password_field :password_confirmation %></div></div>
+            <div class="add_news">
+              <div class="left_news">
+                <%= f.label :role %></div>
+              <div class="right_news">
+
+                <%=  radio_button("user", "role", "1") %> Admin</br>
+                <%=  radio_button("user", "role", "2")  %>Register</br>
+                <%=  radio_button("user", "role", "3")  %>Editor</br>
+                <%=  radio_button("user", "role", "4")  %>Author</br>
+              </div></div>
+
+            <%= f.submit "Create my account", :class => 'news_button' %>
+          </fieldset>
+
+
+        </div>
+      <% end %>
+    </div></div></div> </div>
+
+
+</div>
+</div>
+<!--Main-Body-End-->
+
+<!--Footer-Start-->
+<div class="footer-container">
+  <div class="footer">
+    <div class="footer-content">
+      <div class="footer-content-complete">
+        <div class="moduletable">
+
+
+          <div class="custom"  >
+            <h4>Footer </h4></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--Footer-End-->
+
+</body>
+</html>

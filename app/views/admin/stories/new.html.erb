@@ -1,0 +1,72 @@
+
+<!--Main-Body-Start-->
+<div class="main-body-container">
+  <div class="main-body">
+
+    <div class="main-body-content">
+      <div id="signup_status">
+        Welcome <%= current_user.name %> <%= link_to 'Signout', admin_signout_path %>
+      </div>                      
+      <div id="system-message-container">
+      </div>
+      <h1> Add News </h1>
+      <% flash.each do |k, v| %>
+        <div id="<%= k %>"><%= v %></div>
+      <% end %>
+      <div>
+
+        <div class="contact-form">
+          <div>
+            <%= form_for @stories, :url => admin_stories_path do |form| %>
+              <fieldset class="fields">
+                <div class="add_news">
+                  <div class="left_news">
+                    <%= form.label :title %></div>
+                  <div class="right_news">
+                    <%= form.text_field :title%></div>
+                </div>
+
+                <div class="add_news">
+                  <div class="left_news">
+                    <%= form.label :news %> </div>
+                  <div class="right_news">
+                    <%= form.text_area :news,:rows =>13,:cols => 50  %> </div>
+                </div>
+                <tr>	
+                  <%= form.submit "Submit",:class => 'news_button' %>
+                  <%= link_to "Cancel", :back,:class => 'news_button'	 %>
+                </tr>
+              </fieldset>
+
+
+            </div>
+
+          <% end %>
+
+        </div></div></div> </div>
+
+
+</div>
+</div>
+<!--Main-Body-End-->
+
+<!--Footer-Start-->
+<div class="footer-container">
+  <div class="footer">
+    <div class="footer-content">
+      <div class="footer-content-complete">
+        <div class="moduletable">
+
+
+          <div class="custom"  >
+            <h4>Footer </h4></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--Footer-End-->
+
+</body>
+</html>

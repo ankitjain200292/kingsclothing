@@ -1,0 +1,23 @@
+class Video < ActiveRecord::Base
+validates :title, presence: true
+ validates :description, presence: true
+def self.uploadvideo(upload)
+    name =  upload['datafile'].original_filename
+    fileext = File::extname(name).downcase
+    thumbname = upload['thumbnail'].original_filename
+    thumbfileext = File::extname(thumbname).downcase
+     if fileext==".mp4" 
+     if thumbfileext==".png" or thumbfileext==".gif" or thumbfileext==".jpg" or thumbfileext==".jpeg"
+       directory = "app/assets/images"
+       # create the file path
+       path = File.join(directory, name)
+       thumbpath = File.join(directory, thumbname)
+       # write the file
+       File.open(path, "wb") { |f| f.write(upload['datafile'].read) }
+       File.open(thumbpath, "wb") { |f| f.write(upload['thumbnail'].read) }
+       else
+       return false
+    end
+  end
+end
+end

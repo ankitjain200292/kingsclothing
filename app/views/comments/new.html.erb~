@@ -1,0 +1,71 @@
+
+<!--Main-Body-Start-->
+<div class="main-body-container">
+		<div class="main-body">
+                   
+        	<div class="main-body-content">
+                      
+<div id="system-message-container">
+</div>
+<% flash.each do |k, v| %>
+      <div id="<%= k %>"><%= v %></div>
+    <% end %>
+<div class="contact">				
+<div class="contact-form">
+	<%= form_for @comment, :url => comments_path do |form| %>
+         <fieldset class="fields">
+         <div class="contact-left">
+         <div class="field">
+         <%= form.label :name %><br>
+         <%= form.text_field :name %>
+         </div>
+    
+         <div class="field">
+         <%= form.label :email %><br>
+         <%= form.text_field :email %>
+          </div>
+          <div class="field">
+         <%= form.label :phone %><br>
+         <%= form.text_field :phone %>
+          </div>
+          </div>
+          <div class="contact-right">
+          <div class="field">
+         <%= form.label :comment %><br>
+         <%= form.text_area :comment , :class =>'contact_textarea' %>
+          </div>
+          <%= form.submit "Submit",:class => 'button_validate' %>
+         </fieldset>
+          
+           
+         </div>
+         
+        <% end %>
+
+</div></div> </div>
+              
+                   
+                 </div>
+</div>
+<!--Main-Body-End-->
+
+<!--Footer-Start-->
+<div class="footer-container">
+		<div class="footer">
+        	<div class="footer-content">
+            	<div class="footer-content-complete">
+                      		<div class="moduletable">
+					
+
+<div class="custom"  >
+	<h4>Footer </h4></div>
+		</div>
+	
+                </div>
+            </div>
+        </div>
+</div>
+<!--Footer-End-->
+
+</body>
+</html>

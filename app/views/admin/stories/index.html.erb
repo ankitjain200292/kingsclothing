@@ -1,0 +1,99 @@
+<div class="main-body-container">
+  <div class="main-body">
+    <div class="main-body-content">
+      <div class="test">
+        <div class="testleft"><h1>Listing News</h1></div>
+        <div class="testright">
+          <% if can? :create, @storie %>
+            <div class="iconleft"><%= link_to image_tag('add.png',:size => "30x30"), new_admin_story_path %>New</div>
+          <% end %>
+          <% if can? :update, @storie %>
+            <div class="iconleft"><%= link_to image_tag('edit.png',:size => "30x30"), '#',:id=>'edit' %>Edit</div>
+          <% end %>
+          <% if can? :destroy, @storie %>
+            <div class="iconleft"><%= link_to image_tag('delete.png',:size => "30x30"), admin_stories_path,:id=>'delete' %>Delete</div>
+          <% end %></div></div>
+      <%= form_tag admin_stories_path, :method => 'get' do %>   
+        <%= text_field_tag :query, params[:query] %>  
+        <%= submit_tag "Search", :name => nil %>
+      <% end %>  
+      <%= button_tag "Clear",:onclick =>'clearsearch()'%>
+      <table class="set">
+        <tr>
+          <th> <%= check_box_tag "selectall",1 %></th>
+          <th>Title</th>
+          <th>Created at</th>
+          <th>Show</th>
+          <% if can? :update, @storie %>
+            <th>Edit</th>
+          <% end %>
+          <% if can? :destroy, @storie %>
+            <th>Delete</th>
+          <% end %>
+        </tr>
+        <% @stories.each do |stories| %>
+          <tr>
+            <td><%= check_box_tag "stories[]",stories.id %></td>
+            <td><%= truncate stories.title, length: 30 %></td>
+            <td><%= stories.created_at %></td>
+            <td><%= link_to image_tag('show.png',:size => "20x20"), admin_story_path(stories) %></td>
+            <% if can? :update, stories %>
+              <td><%= link_to image_tag('edit.png',:size => "20x20"), edit_admin_story_path(stories) %></td>
+            <% end %>
+            <% if can? :destroy, @photo %>
+              <td><%= link_to image_tag('DeleteRed.png',:size => "20x20"), admin_story_path(stories), method: :delete,
+                  data: { confirm: 'Are you sure?' } %></td><% end %>
+          </tr>
+        <% end %>
+
+      </table>
+
+      <br />
+      <%= will_paginate @posts,:id =>'photopagination' %>
+    </div>
+  </div>
+</div>
+<div class="footer-container">
+  <div class="footer">
+    <div class="footer-content">
+      <div class="footer-content-complete">
+        <h4>Footer info?</h4>	
+      </div>
+    </div>
+  </div>
+</div>
+<!--Footer-End-->
+</body>
+<script >
+  function clearsearch()
+  {
+    $('#search').val('');
+    window.location.replace('/admin/stories' )
+  }
+  $('#selectall').change	(function() {
+    if (this.checked) {
+      { $('input[type="checkbox"]').prop("checked", true)}; }
+     
+    else {
+      { $('input[type="checkbox"]').prop("checked", false)}; }
+  });
+  $('#delete').click(function() {
+    var selected = new Array();
+    $('.set input:checked').each(function() {
+      selected.push($(this).attr('value'));
+    });
+    $.ajax({
+      type: "post",
+      url: "/admin/deletenews",
+      data: { records:selected }
+    })
+  });
+  $('#edit').click(function() {
+    var selected = new Array();
+    $('.set input:checked').each(function() {
+      selected.push($(this).attr('value'));
+      window.location.replace("/admin/stories/" + selected[0] + "/edit" )
+    }); 
+  });
+</script>
+</html>

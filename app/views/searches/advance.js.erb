@@ -1,0 +1,2 @@
+$( "#test" ).empty();
+$( "#test" ).html( "<%= escape_javascript( render :partial => 'searches/advance', :locals => {:data => @data.first} ) %>" );

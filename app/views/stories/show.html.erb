@@ -1,0 +1,20 @@
+<div class="main-body-container">
+  <div class="main-body">
+    <div class="main-body-content">
+
+      <div class="news">
+        <div class="news-left">
+          <div class="blog">
+            <div class="items-leading">
+
+              <h1><%= @stories.title %></h1><br>
+              <p><%= @stories.news %></p>
+              <%= link_to "Back", :back	 %>
+              <% if signed_in? %>
+                <%= link_to "Edit", edit_admin_story_path(@stories) %>
+              <% end %>
+              <br />
+            </div>
+          </div>
+        </div>
+      </div>

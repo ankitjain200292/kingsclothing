@@ -1,0 +1,28 @@
+<div class="main-body-container">
+		<div class="main-body">
+                   
+        	<div class="main-body-content">
+hello <%= current_user.name %> <%= link_to 'Signout', admin_signout_path %>
+<div id="avs_video" style="width:600px;">
+  
+  <div class="avs_player"> <%= javascript_include_tag 'swfobject' %>
+                <%= video_player(flashvars={:file => asset_path(@videos.video_name),
+                                            :image => asset_path(@videos.thumb_name),
+                                            :bufferlength => 1,
+                                            :autostart => false,:skin => "glow"}, attributes={:width => 600,:height => 400}, params={}) %></div><br>
+<%= link_to "Back", :back	 %>
+</div>
+</div>
+</div>
+<div class="footer-container">
+		<div class="footer">
+        	<div class="footer-content">
+            	<div class="footer-content-complete">
+                	<h4>Footer info?</h4>	
+                </div>
+            </div>
+        </div>
+</div>
+<!--Footer-End-->
+</body>
+</html>

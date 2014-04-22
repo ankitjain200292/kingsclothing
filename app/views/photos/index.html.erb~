@@ -1,0 +1,39 @@
+<!--Main-Body-Start-->
+<div class="main-body-container">
+		<div class="main-body">
+                   
+        	<div class="main-body-content">
+                    
+<div id="system-message-container">
+</div>
+                      <div id="phocagallery" style="width:900px;margin: auto;" class="pg-category-view">
+<div id="pg-icons"></div><div style="clear:both"></div>
+<div class='demonstrations'>
+<%= current_user.name %>
+<% @photos.each do |photos| %>
+<div class="phocagallery-box-file pg-box-image" style="height:168px; width:220px;">
+<div class="phocagallery-box-file-first" style="height:168px;width:218px;margin:auto;">
+<div class="phocagallery-box-file-second">
+<div class="phocagallery-box-file-third">
+<a class="slimbox" title="" rel="lightbox-birthday"  ><%= link_to image_tag(photos.image_name,:size => "200x150"),asset_path(photos.image_name),:class =>'lightview' %></a>
+</div></div></div>
+</div>
+<% end %>
+</div>
+</div>	
+<%= will_paginate @posts,:id =>'photopagination' %>
+
+</div>
+
+<div class="footer-container">
+		<div class="footer">
+        	<div class="footer-content">
+            	<div class="footer-content-complete">
+                	<h4>Footer info?</h4>	
+                </div>
+            </div>
+        </div>
+</div>
+<!--Footer-End-->
+</body>
+</html>

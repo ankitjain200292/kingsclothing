@@ -1,0 +1,14 @@
+<% @data.each do |photos| %>
+          <tr>
+            <td><%= check_box_tag "photos[]",photos.id %></td>
+            <td><%= photos.image_name %></td>
+            <td><%= photos.updated_at.strftime("%m/%d/%Y")  %></td>
+            <td><%= link_to image_tag('show.png',:size => "20x20"), admin_photo_path(photos) %></td>
+            <% if can? :update, photos %>
+              <td><%= link_to image_tag('edit.png',:size => "20x20"), edit_admin_photo_path(photos) %></td>
+            <% end %>
+            <% if can? :destroy, @photo %>
+              <td><%= link_to image_tag('DeleteRed.png',:size => "20x20"), admin_photo_path(photos), method: :delete,
+                  data: { confirm: 'Are you sure?' } %></td><% end %>
+          </tr>
+        <% end %>

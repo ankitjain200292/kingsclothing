@@ -1,0 +1,10 @@
+class StaticPagesController < ApplicationController
+  #require 'youtube_g'
+
+  def index
+  end
+
+  def aboutus
+  end
+  
+end

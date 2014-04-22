@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kingsclothing</title>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+    <script>
+      $(function(){
+        $('#slides').slides({
+          preload: true,
+          preloadImage: 'img/loading.gif',
+          play: 5000,
+          pause: 2500,
+          hoverPause: true,
+          animationStart: function(current){
+            $('.caption').animate({
+              bottom:-35
+            },100);
+            if (window.console && console.log) {
+              // example return of current slide number
+              console.log('animationStart on slide: ', current);
+            };
+          },
+          animationComplete: function(current){
+            $('.caption').animate({
+              bottom:0
+            },200);
+            if (window.console && console.log) {
+              // example return of current slide number
+              console.log('animationComplete on slide: ', current);
+            };
+          },
+          slidesLoaded: function() {
+            $('.caption').animate({
+              bottom:0
+            },200);
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="header-container">
+      <div class="header">
+
+
+
+        <% if signed_in? and request.original_url.include? "admin" %>
+          <div class="admin-header-top">
+            <div class="admin-header-logo">
+              Anthony Nastasi Administrator
+            </div>
+          </div>
+          <div class="menu-bar">
+            <ul>
+              <li><%= link_to "NEWS", admin_stories_path %></li>
+              <li><%= link_to "PHOTOS", admin_photos_path %></li>
+              <li><%= link_to "VIDEOS", admin_videos_path %></li>
+              <%  if current_user.role==1 %>
+                <li><%= link_to "Add User", new_admin_user_path %></li>
+              <% end %>
+            </ul> 
+            <div id="viewsite">
+              Welcome <%= " "+current_user.name %>
+              <%= link_to " Signout", admin_signout_path,:class =>'null' %>
+              <%= link_to "View Site", home_path, :target => '_blank' %>
+            </div>
+          </div> <% else %>
+          <div class="header-top">
+            <div class="header-logo">
+              Anthony Nastasi
+            </div>
+            <div class="social-icons">
+              <ul>
+                <li><a href="#"><%= link_to image_tag("fb-icon.png", alt: "Facebook"), '#' %> </a></li>
+                <li class="icon-last"><a href="#"><%= link_to image_tag("tw-icon.png", alt: "Twitter") %></a></li>
+              </ul>
+            </div>
+          </div>
+          <!--Slider-Start-->
+          <div class="slider">
+            <div class="slider-banner">
+              <div id="container">
+                <div id="example">
+
+                  <div id="slides">
+                    <div class="slides_container">
+                      <div class="slide">
+                        <%= link_to image_tag("slide.jpg", alt: "Facebook"), '#' %>
+                        <div class="caption">
+                          <p>Happy Bokeh Thursday!</p>
+                        </div>
+                      </div>
+                      <div class="slide">
+                        <%= link_to image_tag("slide-7.jpg", alt: "Facebook"), '#' %>
+                        <div class="caption">
+                          <p>Taxi</p>
+                        </div>
+                      </div>
+                      <div class="slide">
+                        <%= link_to image_tag("slide-2.jpg", alt: "Facebook"), '#' %>
+                        <div class="caption">
+                          <p>Happy Bokeh raining Day</p>
+                        </div>
+                      </div>
+                      <div class="slide">
+                        <%= link_to image_tag("slide-3.jpg", alt: "Facebook"), '#' %>
+                        <div class="caption">
+                          <p>We Eat Light</p>
+                        </div>
+                      </div>
+                      <div class="slide">
+                        <%= link_to image_tag("slide-4.jpg", alt: "Facebook"), '#' %>
+                        <div class="caption">
+                          <p>&ldquo;I must go down to the sea again, to the lonely sea and the sky...&rdquo;</p>
+                        </div>
+                      </div>
+                      <div class="slide">
+                        <%= link_to image_tag("slide-5.jpg", alt: "Facebook"), '#' %>
+                        <div class="caption">
+                          <p>twelve.inch</p>
+                        </div>
+                      </div>
+                      <div class="slide">
+                        <%= link_to image_tag("slide-6.jpg", alt: "Facebook"), '#' %>
+                        <div class="caption">
+                          <p>Save my love for loneliness</p>
+                        </div>
+                      </div>
+                    </div>
+                    <a href="#" class="prev"><%= image_tag("arrow-prev.png", alt: "Facebook") %></a>
+                    <a href="#" class="next"><%= image_tag("arrow-next.png", alt: "Facebook") %></a>
+                  </div>
+
+                </div>
+
+              </div>
+              <!--Slider-End-->
+              <!--Menu-Bar-Start-->
+              <div class="menu-bar">
+                <ul>
+                  <li><%= link_to "Home", home_path %></li>
+
+                  <li><%= link_to "NEWS", stories_path %></li>
+                  <li><%= link_to "ABOUT" ,    aboutus_path  %></li>
+                  <li><%= link_to "PHOTOS", photos_path %></li>
+                  <li><%= link_to "VIDEOS", videos_path %></li>
+                  <li><%= link_to "CONTACT",new_contactu_path %></li>
+                </ul>
+              <% end %>
+            </div>
+            <!--Menu-Bar-End-->
+          </div>
+        </div>
+        <%= yield %>
+
+        </body>
+        </html>
